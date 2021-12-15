@@ -1,0 +1,33 @@
+<style>
+        .mainContainer {
+    display: block;
+    width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#定义播放器CSS大小
+</style>
+<body>
+    <div class="mainContainer">
+        <video id="videoElement" class="centeredVideo" controls autoplay width="850" height="478">浏览器太老，放不了....</video>
+</div>
+#定义播放器位置
+    <br>
+        <script src="https://cdn.bootcss.com/flv.js/1.3.3/flv.min.js"></script>
+#引用CDN加速的Flv.js
+    <script>
+        var player = document.getElementById('videoElement');
+        if (flvjs.isSupported()) {
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: 'https://live.quner.icu:8443/live/1.flv'
+            });
+#经过转换的FLV流地址
+#由于监控对于延迟不是很敏感，直接用FLV格式拉流，同时FLV兼容更好。
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load(); 
+            flvPlayer.play();
+#开启自动加载和自动播放（Firefox，Safari，Chrome等对没有Mute标签的Video会拦截自动播放，由于老家电视没有这样的安全策略，故没有加Mute标签）
+        }
+    </script>
+</body>
